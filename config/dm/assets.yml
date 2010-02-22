@@ -1,0 +1,14 @@
+js:
+
+  dmMediaUploadifyerPlugin:
+
+    adminCtrl:        dmAdminMediaUploadifyCtrl
+    swfobject:        swfobject
+    sfWidget:         sfWidgetFormDmUploadify
+    uploadify:        jquery.uploadify.v2.1.0.min
+
+css:
+  
+  dmMediaUploadifyerPlugin:
+
+    uploadify:        uploadify
