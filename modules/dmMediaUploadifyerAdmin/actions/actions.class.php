@@ -31,7 +31,7 @@ class dmMediaUploadifyerAdminActions extends dmAdminBaseActions
       return $this->renderText('success');
     }
 
-    $action = '@dm_media_uploadifyer_multiple_files?folder_id='.$folder->id;
+    $action = '+/dmMediaUploadifyerAdmin/newMultipleFile?folder_id='.$folder->id;
     
     $uploadify_widget = new sfWidgetFormDmUploadify();
     

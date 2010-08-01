@@ -1,3 +1,0 @@
-dm_media_uploadifyer_multiple_files:
-  url:    /dm-media-uploadifyer-multiple-file
-  params: { module: dmMediaUploadifyerAdmin, action: newMultipleFile }
