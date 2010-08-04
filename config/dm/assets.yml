@@ -4,7 +4,7 @@ js:
 
     adminCtrl:        dmAdminMediaUploadifyCtrl
     swfobject:        swfobject
-    sfWidget:         sfWidgetFormDmUploadify
+    sfWidget:         sfWidgetFormDmUploadify.min
     uploadify:        jquery.uploadify.v2.1.0.min
 
 css:
