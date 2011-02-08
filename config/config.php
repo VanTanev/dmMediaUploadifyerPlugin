@@ -3,6 +3,7 @@
 
 
 $this->dispatcher->connect('dm.media_library.control_menu', array('dmMediaUploadifyerConfig', 'listenToMediaLibraryControlMenuEvent'));
+$this->dispatcher->connect('controller.change_action', array('dmMediaUploadifyerConfig', 'listenToActionChangeEvent'));
  
 /**
 * Let's talk a bit about the next piece of code

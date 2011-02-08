@@ -10,12 +10,20 @@ class dmMediaUploadifyerAdminActions extends dmAdminBaseActions
   */
   public function executeNewMultipleFile(dmWebRequest $request)
   {
-    // create new media
 
-    $media = null;
-
-    $this->forward404Unless($folder = dmDb::table('DmMediaFolder')->find($request->getParameter('folder_id')));
-
+    // Retrived the folder by folder_id or by object in case of usage in dmMedia/gallery module
+    if ( $request->hasParameter('folder_id') )
+    {
+      $folderId = $request->getParameter('folder_id');
+    }
+    else 
+    {
+      $objectModel = $request->getParameter('model');
+      $objectPk = $request->getParameter('pk');
+      $object = dmDb::table($objectModel)->find($objectPk);
+      $folderId = $object->getDmMediaFolder()->getId();
+    }
+    $this->forward404Unless($folder = dmDb::table('DmMediaFolder')->find($folderId));
     if (!$folder->isWritable())
     {
       $this->getUser()->logAlert($this->getI18n()->__('Folder %1% is not writable', array('%1%' => $folder->fullPath)));
@@ -27,18 +35,17 @@ class dmMediaUploadifyerAdminActions extends dmAdminBaseActions
     if ($request->isMethod('post') && $form->bindAndValid($request))
     {
       $media = $form->save();                                        
-      
+      if (isset($object)){
+        $object->addMedia($media); // In dmMedia/gallery usage, we also need to associate with the object
+      }
       return $this->renderText('success');
     }
-
-    $action = '+/dmMediaUploadifyerAdmin/newMultipleFile?folder_id='.$folder->id;
-    
-    $uploadify_widget = new sfWidgetFormDmUploadify();
+    $action = '+/dmMediaUploadifyerAdmin/newMultipleFile?'.( isset($object) ? "&model=$objectModel&pk=$objectPk" : 'folder_id='.$folder->id);
     
     return $this->renderAsync(array(
       'html'  => $form->render('.dm_form.list.little action="'.$action.'"'),
-      'css'   => $uploadify_widget->getStylesheets(),
-      'js'    => $uploadify_widget->getJavascripts()
+      'css'   => $form->getStylesheets(),
+      'js'    => $form->getJavascripts()
     ));
   }
   

@@ -16,5 +16,18 @@ class dmMediaUploadifyerConfig
     dmContext::getInstance()->getResponse()->addJavascript('dmMediaUploadifyerPlugin.adminCtrl');
   }
 
+  /**
+   * Used to insert a JS hack to replace the dmMedia/gallery add button by the uplodifier dialog
+   * @param sfEvent $event
+   */
+  public static function listenToActionChangeEvent(sfEvent $event) {
+    if ( dmContext::hasInstance() && $event['module'] == 'dmMedia' && $event['action'] == 'gallery' ){
+      $context = dmContext::getInstance();
+      $context->getResponse()->addStylesheet('lib.ui-dialog');
+      $context->getResponse()->addJavascript('lib.ui-dialog');
+      $context->getResponse()->addJavascript('dmMediaUploadifyerPlugin.galleryHack', 'last');
+    }
+  }
+  
 }
 

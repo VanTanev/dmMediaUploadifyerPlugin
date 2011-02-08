@@ -3,6 +3,7 @@ js:
   dmMediaUploadifyerPlugin:
 
     adminCtrl:        dmAdminMediaUploadifyCtrl
+    galleryHack:      dmAdminMediaUploadifyForGallery
     swfobject:        swfobject
     sfWidget:         sfWidgetFormDmUploadify.min
     uploadify:        jquery.uploadify.v2.1.0.min
