@@ -3,12 +3,10 @@
   __set_up_uploadify_widget = function($uploadified)
   {
     var 
-    $uploadified_form = $uploadified.parents('form'),
-    $field_holder = $uploadified.parent().clone().attr('id', 'a-new-and-unique-id'),
-    meta_data = $uploadified.metadata({
-      type: 'html5'
-    }),
-    link = $uploadified_form.attr('action').replace('+', '%2B');
+        $uploadified_form = $uploadified.parents('form'),
+        $field_holder = $uploadified.parent().clone().attr('id', 'a-new-and-unique-id'),
+        meta_data = $uploadified.metadata({type: 'html5'}),
+        link = $uploadified_form.attr('action').replace('+', '%2B');
     
     $field_holder.children().remove('input, label');
     
@@ -18,7 +16,7 @@
           'for' :  'fileQueue',
           text  :  'Upload Queue'
         })
-        ).append(
+      ).append(
         $('<div/>', {
           id  :  'fileQueue',
           text: '',
@@ -29,7 +27,7 @@
             'float' : 'right'
           }
         })
-        ));
+    ));
     
 
     $uploadified.uploadify({
@@ -42,12 +40,8 @@
       'auto'           : false,
       'multi'          : true,
       'onAllComplete'  : function(event, queueID, fileObj, response, data) {
-        if($('div.ui-dialog-content').length){
-          $uploadified.closest('div.ui-dialog-content').dialog('close');
-        }
-        if ($('#dm_admin_content').length){
-          $('#dm_admin_content').block();
-        }
+        $uploadified.closest('div.ui-dialog-content').dialog('close');
+        $('#dm_admin_content').block();
         window.location.reload();
       },
       'onProgress'     : function(event, queueID, fileObj, data) {
@@ -63,11 +57,11 @@
 
     $uploadified_form.bind('submit', function(e) {
       $uploadified.uploadifySettings('scriptData', $.extend({
-        'uploadify_session_name' : meta_data.session_name, 
-        'uploadify_session_id' : meta_data.session_id
-      }, 
-      __get_form_fields_as_object($uploadified_form)
-        ));
+          'uploadify_session_name' : meta_data.session_name, 
+          'uploadify_session_id' : meta_data.session_id
+        }, 
+        __get_form_fields_as_object($uploadified_form)
+      ));
 
       $uploadified.uploadifyUpload();
     
@@ -91,7 +85,7 @@
 
 
   $(document).ready(function() {
-    __set_up_uploadify_widget($('input.uploadify_file_field'));
+      __set_up_uploadify_widget($('input.uploadify_file_field'));
   });   
 
 
