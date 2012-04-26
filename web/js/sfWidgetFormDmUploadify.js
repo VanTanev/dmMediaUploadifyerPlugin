@@ -40,8 +40,12 @@
       'auto'           : false,
       'multi'          : true,
       'onAllComplete'  : function(event, queueID, fileObj, response, data) {
-        $uploadified.closest('div.ui-dialog-content').dialog('close');
-        $('#dm_admin_content').block();
+        if ($uploadified.closest('div.ui-dialog-content').length){
+          $uploadified.closest('div.ui-dialog-content').dialog('close');  
+        }
+        if ($('#dm_admin_content').length){
+          $('#dm_admin_content').block();  
+        }
         window.location.reload();
       },
       'onProgress'     : function(event, queueID, fileObj, data) {
